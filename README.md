@@ -6,4 +6,4 @@ Uses [native namespace packages](https://packaging.python.org/guides/packaging-n
 [`pip install .`](https://stackoverflow.com/questions/1471994/what-is-setup-py)
 
 ### From GitHub
-[`pip install --update git+git://github.com/bogeholm/dataworks.git`](https://stackoverflow.com/questions/15268953/how-to-install-python-package-from-github)
+[`pip install --upgrade git+git://github.com/bogeholm/dataworks.git`](https://stackoverflow.com/questions/15268953/how-to-install-python-package-from-github)
