@@ -1,0 +1,2 @@
+# Skip B101:assert_used to allow assert a == b in tests.
+skips: ['B101']
