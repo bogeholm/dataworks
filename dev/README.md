@@ -1,0 +1,1 @@
+This directory contains ressources used for development.
