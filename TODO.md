@@ -10,13 +10,15 @@
 - Add coverage at CI
 - Add `flake8` and `black` at CI
 - Add code quality measure
+  - <s>[LGTM](https://lgtm.com/projects/g/bogeholm/dataworks/ci/)</s>
+  - <s>[Codebeat](https://codebeat.co/projects/github-com-bogeholm-dataworks-master)</s>
 
 # Badges
-- License
+- <s>License</s>
 - Black
 - Pipeline
 - Coverage
-- [Quality](https://github.com/bashtage/arch)
+- <s>[Quality](https://github.com/bashtage/arch)</s>
 
 # Links 
 - [Travis CI](https://blog.travis-ci.com/2019-08-07-extensive-python-testing-on-travis-ci)
