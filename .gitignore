@@ -5,9 +5,10 @@
 *.vscode/
 
 
-# Jupyter notebooks used for local development
+# Resources used for local development
 *.ipynb
-
+data/
+jupyter/
 
 # BEGIN Python .gitignore
 # Byte-compiled / optimized / DLL files
