@@ -12,3 +12,6 @@ install:
 
 script:
     - python -m pytest --cov=./
+
+after_script:
+    - codecov --token=$CODECOV_TOKEN
