@@ -3,11 +3,11 @@
 - Import module in data science notebook
 
 # CI 
-- Generate test data
-- Add functions to module
-- Create a unit test
-- Add testing at CI
-- Add coverage at CI
+- <s>Generate test data</s>
+- <s>Add functions to module</s>
+- <s>Create a unit test</s>
+- <s>Add testing at CI</s>
+- <s>Add coverage at CI</s>
 - Add `flake8` and `black` at CI
 - Add code quality measure
   - <s>[LGTM](https://lgtm.com/projects/g/bogeholm/dataworks/ci/)</s>
@@ -17,7 +17,8 @@
 - <s>License</s>
 - Black
 - Pipeline
-- Coverage
+  - <s>Travis</s>
+- <s>Coverage</s>
 - <s>[Quality](https://github.com/bashtage/arch)</s>
 
 # Links 
