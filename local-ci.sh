@@ -1,6 +1,6 @@
 #! /bin/bash
 echo "---------- black ----------"
-black --check *.py
+black --check --include ./**/*.py --verbose
 echo "---------- flake8 ---------"
 flake8 --verbose
 echo "---------- bandit ---------"
