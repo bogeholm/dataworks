@@ -15,4 +15,4 @@ def test_inspect_df_index_sorted():
     df = read_and_inspect()
     v = df.index.values
 
-    assert np.all(v[1:] - v[:-1] == 1) == True
+    assert np.all(v[1:] - v[:-1] == 1)

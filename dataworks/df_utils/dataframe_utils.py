@@ -3,7 +3,8 @@ import pandas as pd
 
 from collections import OrderedDict
 from pandas.api.types import is_numeric_dtype
-from typing import Any, Iterable
+
+# from typing import Any, Iterable
 
 
 def inspect_df(df: pd.DataFrame) -> pd.DataFrame:
@@ -44,7 +45,6 @@ def summarize_df(df: pd.DataFrame) -> pd.DataFrame:
         - columns
             - number of columns
             - number of cols containing NaN's
-    
     """
     # Original DataFrame
     (nrows, _) = df.shape

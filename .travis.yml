@@ -13,6 +13,7 @@ install:
 script:
     - python -m pytest --cov=./
     - black . --check --verbose
+    - flake8 --verbose
 
 after_script:
     - codecov --token=$CODECOV_TOKEN
