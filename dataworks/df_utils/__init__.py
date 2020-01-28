@@ -1,2 +1,2 @@
-name = 'df_utils'
+name = "df_utils"
 from .dataframe_utils import *
