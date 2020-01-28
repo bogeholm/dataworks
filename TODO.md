@@ -8,14 +8,16 @@
 - <s>Create a unit test</s>
 - <s>Add testing at CI</s>
 - <s>Add coverage at CI</s>
-- Add `flake8` and `black` at CI
+- <s>Add `flake8` and `black` at CI<s>
 - Add code quality measure
   - <s>[LGTM](https://lgtm.com/projects/g/bogeholm/dataworks/ci/)</s>
   - <s>[Codebeat](https://codebeat.co/projects/github-com-bogeholm-dataworks-master)</s>
+  - <s>Codacy</s>
+- <s>Codacy preferences - only look at Python</s> (Done in Codacy preferences)
 
 # Badges
 - <s>License</s>
-- Black
+- <s>Black</s>
 - Pipeline
   - <s>Travis</s>
 - <s>Coverage</s>
