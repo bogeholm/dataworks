@@ -12,6 +12,7 @@ install:
 
 script:
     - python -m pytest --cov=./
+    - black --check --include ./**/*.py --verbose
 
 after_script:
     - codecov --token=$CODECOV_TOKEN
