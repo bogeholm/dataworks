@@ -12,8 +12,9 @@ install:
 
 script:
     - python -m pytest --cov=./
-    - black . --check --verbose
+    - black --check --verbose .
     - flake8 --verbose
+    - bandit --configfile bandit.yml --recursive .
 
 after_script:
     - codecov --token=$CODECOV_TOKEN

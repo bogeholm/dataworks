@@ -4,10 +4,10 @@ echo "---------- tests ----------"
 python -m pytest
 
 echo "---------- black ----------"
-black . --check --verbose
+black --check --verbose .
 
 echo "---------- flake8 ---------"
 flake8 --verbose
 
 echo "---------- bandit ---------"
-bandit -c bandit.yml *.py
+bandit --configfile bandit.yml --recursive .
