@@ -2,6 +2,10 @@
 - Import module in development notebook [link](https://stackoverflow.com/questions/1112618/import-python-package-from-local-directory-into-interpreter)
 - Import module in data science notebook
 
+# Packaging
+- Add dependencies et al to `setup.py` - see [`pypa /
+sampleproject`](https://github.com/pypa/sampleproject/blob/master/setup.py)
+
 # CI 
 - <s>Generate test data</s>
 - <s>Add functions to module</s>
