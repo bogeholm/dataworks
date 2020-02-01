@@ -7,6 +7,7 @@
 sampleproject`](https://github.com/pypa/sampleproject/blob/master/setup.py)
 
 # CI 
+- **Add [MyPy](https://mypy.readthedocs.io/en/stable/)**
 - <s>Generate test data</s>
 - <s>Add functions to module</s>
 - <s>Create a unit test</s>
