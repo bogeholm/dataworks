@@ -3,7 +3,7 @@ import pandas as pd
 
 from collections import OrderedDict
 from pandas.api.types import is_numeric_dtype
-from typing import List, Tuple
+from typing import List, Optional, Tuple
 
 
 def inspect_df(df: pd.DataFrame) -> pd.DataFrame:
@@ -99,7 +99,7 @@ def add_datefields(
     column: str,
     drop_original: bool = False,
     inplace: bool = False,
-    attrs: List[str] = None,
+    attrs: Optional[List[str]] = None,
 ) -> pd.DataFrame:
     """ Add attributes of the date to dataFrame df
     """
@@ -140,7 +140,7 @@ def add_datefields(
 
 
 def add_nan_columns(
-    df: pd.DataFrame, inplace: bool = False, column_list: List[str] = None
+    df: pd.DataFrame, inplace: bool = False, column_list: Optional[List[str]] = None
 ) -> pd.DataFrame:
     """ For each column containing NaNs, add a boolean
         column specifying if the column is NaN. Can be used
@@ -190,7 +190,7 @@ def numeric_nans(df: pd.DataFrame) -> pd.DataFrame:
 
 def categorize_df(
     df: pd.DataFrame,
-    columns: List[str] = None,
+    columns: Optional[List[str]] = None,
     inplace: bool = False,
     drop_original: bool = True,
 ) -> Tuple[pd.DataFrame, pd.DataFrame]:
@@ -226,7 +226,7 @@ def categorize_df(
     cat_dict = OrderedDict()
     cat_dict["column"] = cat_cols
     # MyPy picks up an error in the next line. Bug is where?
-    cat_dict["n_categories"] = n_categories # type: ignore[assignment]
+    cat_dict["n_categories"] = n_categories  # type: ignore[assignment]
     cat_dict["categories"] = df_cats
     cat_dict["codes"] = df_codes
     cat_df = pd.DataFrame(cat_dict)
