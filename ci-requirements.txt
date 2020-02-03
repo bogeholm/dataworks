@@ -1,8 +1,9 @@
 numpy
 pandas
+bandit
 black 
 flake8 
-bandit 
+mypy
 pytest 
 pytest-cov 
 codecov

@@ -15,6 +15,7 @@ script:
     - black --check --verbose .
     - flake8 --verbose
     - bandit --configfile bandit.yml --recursive .
+    - mypy --config-file=mypy.ini dataworks/
 
 after_script:
     - codecov --token=$CODECOV_TOKEN

@@ -2,9 +2,11 @@
 Utilities for working with data in Python.
 
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Checked with mypy](https://img.shields.io/badge/mypy-checked-blue)](http://mypy-lang.org/)
 [![Travis build status](https://api.travis-ci.org/bogeholm/dataworks.svg?branch=master)](https://travis-ci.org/bogeholm/dataworks)
 [![codecov](https://codecov.io/gh/bogeholm/dataworks/branch/master/graph/badge.svg)](https://codecov.io/gh/bogeholm/dataworks)
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 [![LGTM alerts](https://img.shields.io/lgtm/alerts/g/bogeholm/dataworks.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/bogeholm/dataworks/alerts/)
 [![LGTM Quality](https://img.shields.io/lgtm/grade/python/github/bogeholm/dataworks.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/bogeholm/dataworks/context:python)
 [![Codacy](https://api.codacy.com/project/badge/Grade/44e0328191574bf6bcf63b9e307a0024)](https://app.codacy.com/manual/bogeholm/dataworks/dashboard)

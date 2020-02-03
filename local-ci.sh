@@ -11,3 +11,6 @@ flake8 --verbose
 
 echo "---------- bandit ---------"
 bandit --configfile bandit.yml --recursive .
+
+echo "---------- mypy -----------"
+mypy --config-file=mypy.ini dataworks/
