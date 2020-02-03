@@ -209,7 +209,7 @@ def categorize_df(
 
     df_codes = []
     df_cats = []
-    n_categories = []
+    n_cats = []
 
     for column in cat_cols:
         new_column = f"{column}_category"
@@ -221,12 +221,13 @@ def categorize_df(
         # DataFrame with the codes
         df_codes.append(col_codes)
         df_cats.append(cat_column.cat.categories)
-        n_categories.append(len(np.unique(col_codes)))
+        n_cats.append(len(np.unique(col_codes)))
 
     cat_dict = OrderedDict()
     cat_dict["column"] = cat_cols
     # MyPy picks up an error in the next line. Bug is where?
-    cat_dict["n_categories"] = n_categories  # type: ignore[assignment]
+    # Additionally, Flake8 will report the MyPy ignore as an error
+    cat_dict["n_categories"] = n_cats  # type: ignore[assignment] # noqa: F821,F821
     cat_dict["categories"] = df_cats
     cat_dict["codes"] = df_codes
     cat_df = pd.DataFrame(cat_dict)
