@@ -22,6 +22,10 @@ With coverage:
 ```python
 python -m pytest --cov=./
 ```
+Without capturing `stdout`:
+```python
+python -m pytest --capture=no
+```
 
 ## Installing
 ### Locally
