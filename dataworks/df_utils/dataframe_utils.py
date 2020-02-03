@@ -9,9 +9,6 @@ from typing import List, Optional, Tuple
 def inspect_df(df: pd.DataFrame) -> pd.DataFrame:
     """ Show column types and null values in DataFrame df
     """
-    if len(df) == 0:
-        print("Empty DataFrame")
-        return
 
     resdict = OrderedDict()
 
@@ -67,7 +64,7 @@ def summarize_df(df: pd.DataFrame) -> pd.DataFrame:
         ncols_type.append(nc)
 
         # Column: number of columns with NaNs
-        nan_cols = stats[(stats["type"] == dt) & stats["nulls"] > 0]
+        nan_cols = stats[(stats["type"] == dt) & (stats["nulls"] > 0)]
         ncols_nan.append(len(nan_cols))
 
         # Column: number of NaNs
