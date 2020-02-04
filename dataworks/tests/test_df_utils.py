@@ -1,14 +1,54 @@
 import numpy as np
 import os
 import pandas as pd
-from dataworks.df_utils import inspect_df, summarize_df
+from pandas.api.types import is_datetime64_any_dtype, is_numeric_dtype, is_object_dtype
+
+from dataworks.df_utils import (
+    add_datefields,
+    add_nan_columns,
+    categorize_df,
+    inspect_df,
+    numeric_nans,
+    summarize_df,
+)
+
+# Name of column in *.csv file to be parsed as dates
+DATE_COLUMN = "date"
+# Suffix appended to columns with null values
+NULL_SUFFIX = "isnull"
+# Suffix appended to categorized columns
+CATEGORY_SUFFIX = "category"
 
 
 def read_testdata_to_dataframe():
     cwd = os.path.dirname(os.path.abspath(__file__))
-    df = pd.read_csv(cwd + "/testdata/testdata.csv", parse_dates=["date"])
+    df = pd.read_csv(
+        cwd + "/testdata/testdata.csv", parse_dates=[DATE_COLUMN], index_col=0
+    )
 
     return df
+
+
+def test_provided_testdata_OK():
+    """ In order for unit tests to make sense, there should be at least:
+            - one date column
+            - one numeric column
+            - one object column
+    """
+    df_org = read_testdata_to_dataframe()
+
+    is_datetime = []
+    is_numeric = []
+    is_object = []
+
+    for col in df_org.columns:
+        is_datetime.append(is_datetime64_any_dtype(df_org[col]))
+        is_numeric.append(is_numeric_dtype(df_org[col]))
+        is_object.append(is_object_dtype(df_org[col]))
+
+    assert True in is_datetime
+    assert True in is_numeric
+    assert True in is_object
 
 
 def test_inspect_df_assert_index_is_sorted():
@@ -47,3 +87,115 @@ def test_summarize_df_check_original_column_types():
 
     # The count should match these fields in df_summary
     assert np.all(colcount == df_summary["ncols"].values)
+
+
+def test_add_datefields_default_behavior():
+    df_org = read_testdata_to_dataframe()
+    df_date = add_datefields(df_org, DATE_COLUMN)
+
+    datefields = [
+        "dayofweek",
+        "dayofyear",
+        "is_month_end",
+        "is_month_start",
+        "is_quarter_end",
+        "is_quarter_start",
+        "quarter",
+        "week",
+    ]
+
+    for field in datefields:
+        assert f"{DATE_COLUMN}_{field}" in df_date.columns.values
+
+
+def test_add_datefields_drop_original():
+    df_org = read_testdata_to_dataframe()
+    df_date = add_datefields(df_org, DATE_COLUMN, drop_original=True)
+
+    assert DATE_COLUMN not in df_date.columns.values
+
+
+def test_add_datefields_custom_field_selection():
+    CUSTOM_CHOICE = "dayofweek"
+
+    df_org = read_testdata_to_dataframe()
+    df_date = add_datefields(df_org, DATE_COLUMN, attrs=[CUSTOM_CHOICE])
+
+    assert f"{DATE_COLUMN}_{CUSTOM_CHOICE}" in df_date.columns.values
+    assert len(df_date.columns) == (len(df_org.columns) + 1)
+
+
+def test_add_datefields_inplace():
+    CUSTOM_CHOICE = "dayofyear"
+
+    df_org = read_testdata_to_dataframe()
+    _ = add_datefields(df_org, DATE_COLUMN, inplace=True)
+
+    assert f"{DATE_COLUMN}_{CUSTOM_CHOICE}" in df_org.columns.values
+
+
+def test_add_nan_columns_default_behavior():
+    df_org = read_testdata_to_dataframe()
+    df_null = add_nan_columns(df_org)
+
+    # Returns pandas series with column name as index, boolean as values
+    null_bool = df_org.isnull().sum() != 0
+    null_cols = null_bool.index[null_bool.values]
+
+    for colname in null_cols:
+        assert f"{colname}_{NULL_SUFFIX}" in df_null.columns.values
+
+
+def test_add_nan_columns_custom_field_selection():
+    CUSTOM_CHOICE = "setting"
+
+    df_org = read_testdata_to_dataframe()
+    df_null = add_nan_columns(df_org, column_list=[CUSTOM_CHOICE])
+
+    assert f"{CUSTOM_CHOICE}_{NULL_SUFFIX}" in df_null.columns.values
+    assert len(df_null.columns) == (len(df_org.columns) + 1)
+
+
+def test_add_nan_columns_inplace():
+    CUSTOM_CHOICE = "setting"
+
+    df_org = read_testdata_to_dataframe()
+    _ = add_nan_columns(df_org, column_list=[CUSTOM_CHOICE], inplace=True)
+
+    assert f"{CUSTOM_CHOICE}_{NULL_SUFFIX}" in df_org.columns.values
+
+
+def test_numeric_nans_default_behavior():
+    df_org = read_testdata_to_dataframe()
+    df_inspect = inspect_df(df_org)
+    df_numeric = numeric_nans(df_org)
+
+    numeric_cols = df_inspect[df_inspect["is_numeric"]]["column"].values
+
+    for col in numeric_cols:
+        df_inspect_nulls = df_inspect[df_inspect["column"] == col]["nulls"].values[0]
+        # These could contain zero nulls, depending on the test data
+        if df_inspect_nulls > 0:
+            df_numeric_nulls = df_numeric[df_numeric["column"] == col]["nulls"].values[
+                0
+            ]
+            assert col in df_numeric["column"].values
+            assert df_numeric_nulls == df_inspect_nulls
+        else:
+            assert col not in df_numeric["column"].values
+
+
+def test_categorize_df_object_columns_categorized():
+    df_org = read_testdata_to_dataframe()
+    (df_cat, _) = categorize_df(df_org)
+
+    org_cols = df_org.columns.values
+    is_object = []
+
+    for col in org_cols:
+        is_object.append(is_object_dtype(df_org[col]))
+
+    object_cols = org_cols[is_object]
+
+    for col in object_cols:
+        assert f"{col}_{CATEGORY_SUFFIX}" in df_cat.columns.values
