@@ -15,15 +15,15 @@ Utilities for working with data in Python.
 
 ## Testing
 [Against local copy](https://docs.pytest.org/en/latest/goodpractices.html):
-```python
+```bash
 python -m pytest
 ```
 With coverage:
-```python
+```bash
 python -m pytest --cov=./
 ```
 Without capturing `stdout`:
-```python
+```bash
 python -m pytest --capture=no
 ```
 
