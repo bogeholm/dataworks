@@ -2,7 +2,7 @@
 Utilities for working with data in Python.
 
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Checked with mypy](https://img.shields.io/badge/mypy-checked-blue)](http://mypy-lang.org/)
+[![Checked with mypy](https://img.shields.io/badge/mypy-checked-blue)](https://mypy.readthedocs.io/en/stable/)
 [![Travis build status](https://api.travis-ci.org/bogeholm/dataworks.svg?branch=master)](https://travis-ci.org/bogeholm/dataworks)
 [![codecov](https://codecov.io/gh/bogeholm/dataworks/branch/master/graph/badge.svg)](https://codecov.io/gh/bogeholm/dataworks)
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
