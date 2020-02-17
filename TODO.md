@@ -6,6 +6,9 @@
 - Add dependencies et al to `setup.py` - see [`pypa /
 sampleproject`](https://github.com/pypa/sampleproject/blob/master/setup.py)
 
+# Functionality
+- Change all mentions of `nan` to `null`
+
 # CI 
 - <s>Add [MyPy](https://mypy.readthedocs.io/en/stable/)</s>
   - </s>Check up on [MyPy options](https://mypy.readthedocs.io/en/latest/command_line.html#following-imports-or-not)<s>
