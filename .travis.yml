@@ -33,9 +33,6 @@ jobs:
         skip_cleanup: true
         github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
         keep_history: true
-        on:
-          branch: master
-          python: "3.8"
 
 #pdoc --html -c show_type_annotations=True dataworks --output-dir public/ # Build on all Pythons
 #pdoc --html --force -c show_type_annotations=True dataworks --output-dir docs
