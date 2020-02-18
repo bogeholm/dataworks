@@ -1,8 +1,12 @@
 # Python .gitignore from https://github.com/github/gitignore/blob/master/Python.gitignore 25-01-2020
 
-
 # VS Code
 *.vscode/
+
+# Ignore anything (generated docs) in public except .nojekyll
+# https://stackoverflow.com/questions/987142/make-gitignore-ignore-everything-except-a-few-files
+public/*
+!public/.nojekyll
 
 
 # Resources used for local development
