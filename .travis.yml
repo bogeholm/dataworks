@@ -16,10 +16,10 @@ script:
     - flake8 --verbose
     - bandit --configfile bandit.yml --recursive .
     - mypy --config-file=mypy.ini dataworks/
+    - pdoc --html -c show_type_annotations=True dataworks --output-dir public/ # Build on all Pythons
 
 after_script:
     - codecov --token=$CODECOV_TOKEN
-    - pdoc --html -c show_type_annotations=True dataworks --output-dir public/
 
 # https://docs.travis-ci.com/user/deployment/pages/
 deploy:
