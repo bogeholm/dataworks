@@ -3,30 +3,44 @@
 language: python
 
 python:
-    - "3.6"      # current default Python on Travis CI
-    - "3.7"
-    - "3.8"
+  - "3.6"      # current default Python on Travis CI
+  - "3.7"
+  - "3.8"
   
 install:
-    - pip install -r ci-requirements.txt
+  - pip install -r ci-requirements.txt
 
 script:
-    - python -m pytest --cov=./
-    - black --check --verbose .
-    - flake8 --verbose
-    - bandit --configfile bandit.yml --recursive .
-    - mypy --config-file=mypy.ini dataworks/
-    - pdoc --html -c show_type_annotations=True dataworks --output-dir public/ # Build on all Pythons
-
+  - python -m pytest --cov=./
+  - black --check --verbose .
+  - flake8 --verbose
+  - bandit --configfile bandit.yml --recursive .
+  - mypy --config-file=mypy.ini dataworks/
+    
 after_script:
-    - codecov --token=$CODECOV_TOKEN
+  - codecov --token=$CODECOV_TOKEN
 
 # https://docs.travis-ci.com/user/deployment/pages/
-deploy:
-    provider: pages
-    skip_cleanup: true
-    github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
-    keep_history: true
-    on:
-      branch: master
-      python: "3.8"
+# https://docs.travis-ci.com/user/build-stages/matrix-expansion/
+# https://docs.travis-ci.com/user/build-stages/deploy-github-releases/
+jobs:
+  include:
+    - stage: GitHub Pages
+      script:
+        - echo 'Deploying'
+      deploy:
+        provider: pages
+        skip_cleanup: true
+        github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+        keep_history: true
+        on:
+          branch: master
+          python: "3.8"
+
+#pdoc --html -c show_type_annotations=True dataworks --output-dir public/ # Build on all Pythons
+#pdoc --html --force -c show_type_annotations=True dataworks --output-dir docs
+#rm -rf public/
+#mkdir -p public/
+#mv docs/dataworks/* public/
+#touch public/.nojekyll
+  

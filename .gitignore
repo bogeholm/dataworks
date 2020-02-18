@@ -3,7 +3,10 @@
 # VS Code
 *.vscode/
 
-# Ignore anything (generated docs) in public except .nojekyll
+# Used for generating docs. They are moved to public/ for publishing
+docs/*
+
+# Ignore anything (moved/generated docs) in public except .nojekyll
 # https://stackoverflow.com/questions/987142/make-gitignore-ignore-everything-except-a-few-files
 public/*
 !public/.nojekyll
