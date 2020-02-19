@@ -12,7 +12,7 @@ Utilities for working with data in Python.
 [![Codacy](https://api.codacy.com/project/badge/Grade/44e0328191574bf6bcf63b9e307a0024)](https://app.codacy.com/manual/bogeholm/dataworks/dashboard)
 [![Codebeat](https://codebeat.co/badges/12172b77-cbda-4c87-b3ae-c9baf5036e73)](https://codebeat.co/projects/github-com-bogeholm-dataworks-master)
 
-**[https://bogeholm.github.io/dataworks/](https://bogeholm.github.io/dataworks/)**
+**[bogeholm.github.io/dataworks/](https://bogeholm.github.io/dataworks/)**
 
 ## Testing
 [Against local copy](https://docs.pytest.org/en/latest/goodpractices.html):
