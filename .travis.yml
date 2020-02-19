@@ -27,7 +27,11 @@ jobs:
   include:
     - stage: GitHub Pages
       script:
-        - echo 'Deploying'
+        - pdoc --html --force -c show_type_annotations=True dataworks --output-dir docs
+        - rm -rf public/
+        - mkdir -p public/
+        - mv docs/dataworks/* public/
+        - touch public/.nojekyll
       deploy:
         provider: pages
         skip_cleanup: true
