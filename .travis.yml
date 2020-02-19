@@ -32,6 +32,7 @@ jobs:
         - mkdir -p public/
         - mv docs/dataworks/* public/
         - touch public/.nojekyll
+        - cd public && ls # test
       deploy:
         provider: pages
         skip_cleanup: true
