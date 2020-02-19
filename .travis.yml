@@ -37,8 +37,9 @@ jobs:
         provider: pages
         skip_cleanup: true
         github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
-        keep_history: true # ?
+        target_branch: gh-pages
         local_dir: public
         verbose: true
         on: 
           branch: master
+# keep_history: true # ?
