@@ -8,3 +8,4 @@ pytest
 pytest-cov 
 codecov
 pdoc3
+scikit-learn

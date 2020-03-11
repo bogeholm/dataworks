@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 
 from collections import OrderedDict
-from pandas.api.types import is_numeric_dtype
-from typing import List, Optional, Tuple
+from pandas.api.types import is_numeric_dtype, is_object_dtype, is_categorical_dtype
+from typing import List, Optional, Tuple, Callable
 
 
 def inspect_df(df: pd.DataFrame) -> pd.DataFrame:
@@ -209,7 +209,7 @@ def categorize_df(
     n_cats = []
 
     for column in cat_cols:
-        new_column = f"{column}_category"
+        new_column = f"{column}_cat"
         cat_column = df[column].astype("category")
         # By default, NaN is -1. We convert to zero by incrementing all.
         col_codes = cat_column.cat.codes + 1
@@ -233,3 +233,123 @@ def categorize_df(
         resdf.drop(columns=cat_cols, inplace=True)
 
     return (resdf, cat_df)
+
+
+def replace_numeric_nulls(
+    df: pd.DataFrame,
+    columns: Optional[List[str]] = None,
+    function: Callable = np.median,
+    inplace: bool = False,
+) -> pd.DataFrame:
+    """ Replace nulls in all numerical column with the median (default) or
+        another callable function that works on NumPy arrays
+    """
+    if columns is None:
+        columns = [
+            colname for colname, column in df.items() if is_numeric_dtype(column)
+        ]
+
+    if inplace:
+        resdf = df
+    else:
+        resdf = df.copy(deep=True)
+
+    fillers = OrderedDict()
+
+    for column in columns:
+        values = resdf[resdf[column].notnull()][column].values
+        fillers[column] = function(values)
+
+    resdf.fillna(value=fillers, inplace=True)
+    return resdf
+
+
+def object_nan_to_empty(df: pd.DataFrame, inplace: bool = False) -> pd.DataFrame:
+    """ Replace NaN in Pandas object columns with an empty string
+        indicating a missing value.
+    """
+    columns = [colname for colname, column in df.items() if is_object_dtype(column)]
+    fillers = {c: "" for c in columns}
+
+    if inplace:
+        resdf = df
+    else:
+        resdf = df.copy(deep=True)
+
+    resdf.fillna(value=fillers, inplace=True)
+    return resdf
+
+
+def categorical_columns(
+    df: pd.DataFrame, columns: Optional[List[str]] = None, inplace: bool = False
+) -> pd.DataFrame:
+    """ For any object columns, create categorical columns instead.
+    """
+    if columns is None:
+        columns = [colname for colname, column in df.items() if is_object_dtype(column)]
+
+    if inplace:
+        resdf = df
+    else:
+        resdf = df.copy(deep=True)
+
+    for column in columns:
+        resdf[column] = df[column].astype("category")
+
+    return resdf
+
+
+def apply_categories(
+    df: pd.DataFrame,
+    columns: Optional[List[str]] = None,
+    inplace: bool = False,
+    drop: bool = False,
+) -> pd.DataFrame:
+    """ For any categorical columns, add a new column with the codes, postfixed with '_cat'.
+        If 'drop' is tru, drop the original columns
+    """
+    if columns is None:
+        columns = [
+            colname for colname, column in df.items() if is_categorical_dtype(column)
+        ]
+
+    if inplace:
+        resdf = df
+    else:
+        resdf = df.copy(deep=True)
+
+    for column in columns:
+        catcol = f"{column}_cat"
+        resdf[catcol] = resdf[column].cat.codes
+
+    if drop:
+        resdf.drop(columns=columns, inplace=True)
+
+    return resdf
+
+
+def split_dataset(
+    df: pd.DataFrame,
+    column: str,
+    indices: Optional[List[bool]] = None,
+    fromto: Optional[Tuple[int, int]] = None,
+) -> Tuple[pd.DataFrame, np.array]:
+    """ Split DataFrame into dependent and independent variables. 'column' is split
+        to a NymPy array. 'indices' overrides 'fromto'. Indices could be used to
+        randomly sample the dataframe. If neither 'indices' or 'fromto' are given,
+        return the whole dataset.
+    """
+    if indices is not None:
+        resdf = df[indices].copy(deep=True)
+    elif fromto is not None:
+        (low, up) = fromto
+        resdf = df[low:up].copy(deep=True)
+    else:
+        resdf = df.copy(deep=True)
+
+    # dependent variable
+    y_vals = np.array(resdf[column].values)
+    # independent variable(s)
+    resdf.drop(columns=column, inplace=True)
+
+    return resdf, y_vals

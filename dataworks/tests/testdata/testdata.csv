@@ -1,101 +1,101 @@
-,date,level,setting,health
-0,2019-10-28,Medium,,53.0
-1,2007-04-24,High,proximity blast,27.0
-2,2001-03-21,Critical,expanding energy pulse,55.0
-3,2019-08-03,,field burst,
-4,2013-11-13,High,proximity blast,27.0
-5,2014-04-13,High,proximity blast,55.0
-6,2014-03-19,Low,,13.0
-7,2011-12-14,Low,disintegrate,6.0
-8,2001-11-12,,stun,
-9,2013-07-22,,field burst,49.0
-10,2001-06-29,,field burst,13.0
-11,2019-02-19,High,heat,86.0
-12,2001-02-12,Low,field burst,77.0
-13,2006-12-02,,disintegrate,9.0
-14,2000-08-21,Medium,stun,95.0
-15,2005-04-28,Critical,disintegrate,70.0
-16,2017-02-10,Low,expanding energy pulse,59.0
-17,2009-04-16,Critical,heat,23.0
-18,2005-03-02,High,disintegrate,9.0
-19,2009-08-03,Low,stun,10.0
-20,2018-03-11,,luvetric pulse,28.0
-21,2009-01-27,Critical,,68.0
-22,2005-01-25,Medium,,61.0
-23,2003-07-18,Medium,,64.0
-24,2019-01-08,Critical,luvetric pulse,
-25,2007-08-09,Critical,field burst,2.0
-26,2010-03-21,High,stun,68.0
-27,2000-10-30,Medium,expanding energy pulse,83.0
-28,2002-04-12,Critical,disintegrate,96.0
-29,2003-08-01,High,,85.0
-30,2006-05-22,Critical,expanding energy pulse,9.0
-31,2015-12-30,Medium,heat,99.0
-32,2018-10-18,Low,field burst,
-33,2016-06-27,Medium,proximity blast,36.0
-34,2016-06-12,Medium,luvetric pulse,70.0
-35,2004-05-25,High,,7.0
-36,2008-04-03,,,81.0
-37,2000-07-25,,luvetric pulse,81.0
-38,2008-04-06,Critical,disintegrate,12.0
-39,2015-05-25,,stun,78.0
-40,2008-01-11,Medium,luvetric pulse,
-41,2017-06-30,Low,disintegrate,25.0
-42,2017-05-02,Low,field burst,8.0
-43,2017-06-11,Critical,proximity blast,1.0
-44,2011-08-22,,stun,98.0
-45,2009-09-29,Low,,13.0
-46,2012-01-20,Low,proximity blast,20.0
-47,2003-10-26,Medium,stun,95.0
-48,2007-04-20,High,disintegrate,84.0
-49,2008-06-15,Low,stun,30.0
-50,2009-09-05,Medium,stun,97.0
-51,2019-12-30,Medium,expanding energy pulse,84.0
-52,2019-03-09,Critical,luvetric pulse,
-53,2011-08-31,Low,stun,28.0
-54,2000-04-01,Medium,expanding energy pulse,82.0
-55,2003-10-06,Critical,expanding energy pulse,89.0
-56,2015-05-04,,disintegrate,75.0
-57,2002-07-08,High,heat,89.0
-58,2007-07-05,Medium,field burst,
-59,2014-09-02,Critical,expanding energy pulse,14.0
-60,2019-08-07,,,
-61,2000-02-29,Critical,,40.0
-62,2005-11-11,Medium,heat,69.0
-63,2018-07-15,Medium,,51.0
-64,2014-04-19,Medium,proximity blast,
-65,2003-08-25,Critical,,78.0
-66,2004-07-12,,disintegrate,68.0
-67,2010-10-14,Critical,luvetric pulse,
-68,2003-03-04,Low,stun,7.0
-69,2013-06-22,High,field burst,
-70,2003-06-21,Critical,disintegrate,83.0
-71,2005-10-14,High,disintegrate,
-72,2010-05-14,Medium,disintegrate,88.0
-73,2006-03-13,High,heat,63.0
-74,2012-04-06,,stun,
-75,2015-04-30,Low,luvetric pulse,53.0
-76,2013-02-21,High,stun,20.0
-77,2001-02-21,Medium,luvetric pulse,62.0
-78,2002-05-20,High,proximity blast,41.0
-79,2005-10-28,,heat,
-80,2006-12-13,,stun,45.0
-81,2014-11-24,High,heat,36.0
-82,2010-07-02,High,proximity blast,
-83,2016-11-26,Critical,stun,17.0
-84,2019-05-13,,luvetric pulse,
-85,2014-09-29,,proximity blast,
-86,2007-11-16,,heat,6.0
-87,2016-09-13,,disintegrate,90.0
-88,2015-03-25,Critical,field burst,71.0
-89,2006-02-18,Medium,disintegrate,25.0
-90,2000-01-06,High,proximity blast,57.0
-91,2004-12-17,,expanding energy pulse,48.0
-92,2012-09-03,Low,expanding energy pulse,
-93,2015-10-29,Low,disintegrate,28.0
-94,2015-06-18,,heat,39.0
-95,2012-12-26,Low,proximity blast,78.0
-96,2008-03-31,Medium,proximity blast,20.0
-97,2004-07-05,,stun,
-98,2000-01-18,Low,stun,93.0
-99,2009-07-06,Medium,luvetric pulse,44.0
+,date,level,setting,health,xp
+0,2002-05-23,Critical,stun,12.0,755.0
+1,2016-03-05,Critical,,,620.0
+2,2004-01-11,Critical,proximity blast,61.0,470.0
+3,2011-01-02,Medium,proximity blast,30.0,133.0
+4,2008-08-08,Critical,expanding energy pulse,42.0,564.0
+5,2001-01-25,High,luvetric pulse,20.0,169.0
+6,2015-06-12,,stun,20.0,637.0
+7,2015-10-23,Medium,,27.0,
+8,2016-12-22,Critical,field burst,,852.0
+9,2012-12-28,High,luvetric pulse,25.0,878.0
+10,2013-10-06,Critical,expanding energy pulse,89.0,460.0
+11,2003-08-19,High,expanding energy pulse,16.0,963.0
+12,2004-12-06,,luvetric pulse,38.0,392.0
+13,2006-11-20,High,heat,14.0,541.0
+14,2002-05-21,High,proximity blast,75.0,358.0
+15,2009-01-14,High,field burst,93.0,262.0
+16,2014-09-29,Medium,disintegrate,,228.0
+17,2002-01-18,Medium,stun,,939.0
+18,2017-10-18,High,disintegrate,61.0,222.0
+19,2018-05-26,Medium,disintegrate,51.0,
+20,2002-08-28,Low,heat,83.0,154.0
+21,2015-12-22,Medium,,85.0,783.0
+22,2004-10-19,Critical,disintegrate,82.0,758.0
+23,2010-02-04,Medium,heat,97.0,913.0
+24,2008-10-18,Medium,expanding energy pulse,86.0,668.0
+25,2001-02-18,Medium,expanding energy pulse,10.0,627.0
+26,2012-05-16,,proximity blast,31.0,
+27,2001-08-12,Medium,luvetric pulse,90.0,
+28,2000-01-02,Critical,field burst,58.0,684.0
+29,2004-03-23,High,proximity blast,30.0,446.0
+30,2019-10-25,,,45.0,
+31,2010-05-20,Critical,disintegrate,15.0,683.0
+32,2017-09-02,High,proximity blast,88.0,489.0
+33,2000-03-30,Critical,luvetric pulse,,335.0
+34,2003-10-01,Critical,field burst,38.0,280.0
+35,2009-05-08,,expanding energy pulse,59.0,444.0
+36,2009-05-05,Low,heat,15.0,603.0
+37,2004-04-15,Low,disintegrate,79.0,
+38,2014-02-07,High,,96.0,592.0
+39,2011-04-20,High,,58.0,223.0
+40,2011-11-23,,proximity blast,45.0,805.0
+41,2013-10-21,Low,luvetric pulse,,632.0
+42,2009-12-17,,expanding energy pulse,,633.0
+43,2002-03-12,Medium,expanding energy pulse,,
+44,2014-07-07,Low,field burst,41.0,995.0
+45,2000-10-12,Critical,,5.0,174.0
+46,2004-01-26,,expanding energy pulse,54.0,
+47,2011-02-15,,disintegrate,11.0,105.0
+48,2000-10-11,High,proximity blast,,400.0
+49,2002-03-02,Critical,disintegrate,67.0,
+50,2013-10-31,,stun,95.0,
+51,2008-07-21,,proximity blast,47.0,
+52,2001-03-14,High,disintegrate,52.0,580.0
+53,2017-01-29,Low,disintegrate,18.0,185.0
+54,2017-08-20,,,81.0,189.0
+55,2004-09-23,Medium,proximity blast,,590.0
+56,2010-02-21,,field burst,18.0,
+57,2017-09-16,Critical,heat,7.0,511.0
+58,2016-10-06,High,stun,30.0,188.0
+59,2008-01-08,Low,expanding energy pulse,28.0,965.0
+60,2013-02-12,Critical,expanding energy pulse,27.0,628.0
+61,2015-12-12,Low,luvetric pulse,47.0,184.0
+62,2009-01-03,Low,expanding energy pulse,55.0,368.0
+63,2007-03-24,,stun,81.0,411.0
+64,2014-01-10,Critical,proximity blast,39.0,787.0
+65,2018-12-04,Medium,disintegrate,98.0,
+66,2008-02-19,Low,,36.0,
+67,2016-09-01,Critical,field burst,73.0,345.0
+68,2000-12-24,High,luvetric pulse,62.0,940.0
+69,2012-04-19,Critical,proximity blast,,346.0
+70,2005-06-25,Critical,field burst,73.0,810.0
+71,2009-12-26,Critical,expanding energy pulse,,
+72,2013-10-31,Low,,65.0,289.0
+73,2016-05-30,Medium,stun,,648.0
+74,2009-03-14,Critical,expanding energy pulse,78.0,624.0
+75,2014-05-28,Critical,proximity blast,22.0,260.0
+76,2000-01-10,Medium,disintegrate,25.0,942.0
+77,2003-02-25,High,stun,,806.0
+78,2003-10-07,,luvetric pulse,17.0,917.0
+79,2017-01-12,Low,,44.0,408.0
+80,2010-07-08,Medium,stun,16.0,418.0
+81,2018-09-18,,disintegrate,63.0,229.0
+82,2007-03-08,Critical,proximity blast,29.0,184.0
+83,2001-05-14,High,luvetric pulse,,
+84,2007-02-05,Medium,heat,85.0,650.0
+85,2009-12-07,,heat,31.0,288.0
+86,2001-09-12,High,proximity blast,,722.0
+87,2008-12-02,Medium,heat,75.0,475.0
+88,2010-03-19,Medium,expanding energy pulse,94.0,187.0
+89,2011-07-27,,proximity blast,93.0,
+90,2013-03-03,Critical,proximity blast,,773.0
+91,2017-05-29,Low,expanding energy pulse,10.0,321.0
+92,2011-11-07,,heat,44.0,911.0
+93,2000-04-19,Low,disintegrate,5.0,416.0
+94,2016-08-18,Medium,heat,55.0,347.0
+95,2018-09-26,High,stun,72.0,451.0
+96,2018-01-06,,field burst,,119.0
+97,2013-11-18,Critical,field burst,73.0,
+98,2016-11-28,High,proximity blast,84.0,
+99,2018-06-25,Medium,,61.0,176.0

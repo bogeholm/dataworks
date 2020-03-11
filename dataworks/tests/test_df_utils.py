@@ -2,6 +2,8 @@ import numpy as np
 import os
 import pandas as pd
 from pandas.api.types import is_datetime64_any_dtype, is_numeric_dtype, is_object_dtype
+from sklearn.ensemble import RandomForestRegressor
+import pytest
 
 from dataworks.df_utils import (
     add_datefields,
@@ -10,6 +12,11 @@ from dataworks.df_utils import (
     inspect_df,
     numeric_nans,
     summarize_df,
+    replace_numeric_nulls,
+    object_nan_to_empty,
+    categorical_columns,
+    apply_categories,
+    split_dataset,
 )
 
 # Name of column in *.csv file to be parsed as dates
@@ -17,7 +24,7 @@ DATE_COLUMN = "date"
 # Suffix appended to columns with null values
 NULL_SUFFIX = "isnull"
 # Suffix appended to categorized columns
-CATEGORY_SUFFIX = "category"
+CATEGORY_SUFFIX = "cat"
 
 
 def read_testdata_to_dataframe():
@@ -199,3 +206,46 @@ def test_categorize_df_object_columns_categorized():
 
     for col in object_cols:
         assert f"{col}_{CATEGORY_SUFFIX}" in df_cat.columns.values
+
+
+def test_pipeline_integration_with_scikit_learn():
+    DATA_COLUMN = "y_data"
+
+    df_org = read_testdata_to_dataframe()
+    df_test = replace_numeric_nulls(df_org)
+    df_test = object_nan_to_empty(df_test)
+    df_test = categorical_columns(df_test)
+    df_test = apply_categories(df_test, drop=True)
+    df_test = add_datefields(df_test, "date", drop_original=True)
+
+    # Add column with 'dependent variable'
+    df_test[DATA_COLUMN] = np.arange(len(df_test))
+    # Split variable out again
+    X_data, y_data = split_dataset(df_test, DATA_COLUMN)
+
+    model = RandomForestRegressor(n_estimators=2, n_jobs=1, max_depth=3)
+    model.fit(X_data, y_data)
+
+
+def test_pipeline_integration_with_scikit_learn_missing_step_should_fail():
+    """ The purpose of this test is to make sure that
+        test_pipeline_integration_with_scikit_learn() will fail if the data is
+        not processed correctly
+    """
+    DATA_COLUMN = "y_data"
+
+    df_org = read_testdata_to_dataframe()
+    df_test = replace_numeric_nulls(df_org)
+    df_test = object_nan_to_empty(df_test)
+    df_test = categorical_columns(df_test)
+    # df_test = apply_categories(df_test, drop=True)
+    df_test = add_datefields(df_test, "date", drop_original=True)
+
+    # Add column with 'dependent variable'
+    df_test[DATA_COLUMN] = np.arange(len(df_test))
+    # Split variable out again
+    X_data, y_data = split_dataset(df_test, DATA_COLUMN)
+
+    model = RandomForestRegressor(n_estimators=2, n_jobs=1, max_depth=3)
+    with pytest.raises(Exception):
+        model.fit(X_data, y_data)
