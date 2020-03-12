@@ -8,6 +8,7 @@ sampleproject`](https://github.com/pypa/sampleproject/blob/master/setup.py)
 
 # Functionality
 - Change all mentions of `nan` to `null`
+- Add more functions from [3-performance-validation-and-model-interpretation.ipynb](https://github.com/bogeholm/fastai-intro-to-ml/blob/master/3-performance-validation-and-model-interpretation.ipynb)
 
 # CI 
 - <s>Add [MyPy](https://mypy.readthedocs.io/en/stable/)</s>
