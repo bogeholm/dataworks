@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.7.5" />
+<title>dataworks.tests.test_df_utils API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{font-weight:bold}#index h4 + ul{margin-bottom:.6em}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>dataworks.tests.test_df_utils</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import numpy as np
+import os
+import pandas as pd
+from pandas.api.types import is_datetime64_any_dtype, is_numeric_dtype, is_object_dtype
+from sklearn.ensemble import RandomForestRegressor
+import pytest
+
+from dataworks.df_utils import (
+    add_datefields,
+    add_nan_columns,
+    categorize_df,
+    inspect_df,
+    numeric_nans,
+    summarize_df,
+    replace_numeric_nulls,
+    object_nan_to_empty,
+    categorical_columns,
+    apply_categories,
+    split_dataset,
+)
+
+# Name of column in *.csv file to be parsed as dates
+DATE_COLUMN = &#34;date&#34;
+# Suffix appended to columns with null values
+NULL_SUFFIX = &#34;isnull&#34;
+# Suffix appended to categorized columns
+CATEGORY_SUFFIX = &#34;cat&#34;
+
+
+def read_testdata_to_dataframe():
+    cwd = os.path.dirname(os.path.abspath(__file__))
+    df = pd.read_csv(
+        cwd + &#34;/testdata/testdata.csv&#34;, parse_dates=[DATE_COLUMN], index_col=0
+    )
+
+    return df
+
+
+def test_provided_testdata_OK():
+    &#34;&#34;&#34; In order for unit tests to make sense, there should be at least:
+            - one date column
+            - one numeric column
+            - one object column
+    &#34;&#34;&#34;
+    df_org = read_testdata_to_dataframe()
+
+    is_datetime = []
+    is_numeric = []
+    is_object = []
+
+    for col in df_org.columns:
+        is_datetime.append(is_datetime64_any_dtype(df_org[col]))
+        is_numeric.append(is_numeric_dtype(df_org[col]))
+        is_object.append(is_object_dtype(df_org[col]))
+
+    assert True in is_datetime
+    assert True in is_numeric
+    assert True in is_object
+
+
+def test_inspect_df_assert_index_is_sorted():
+    df = inspect_df(read_testdata_to_dataframe())
+    v = df.index.values
+
+    assert np.all(v[1:] - v[:-1] == 1)
+
+
+def test_inspect_df_check_sum_of_nulls():
+    df_org = read_testdata_to_dataframe()
+    df_inspect = inspect_df(df_org)
+
+    assert df_inspect[&#34;nulls&#34;].sum() == df_org.isnull().sum().sum()
+
+
+def test_summarize_df_check_sum_of_nulls():
+    df_org = read_testdata_to_dataframe()
+    df_summary = summarize_df(df_org)
+
+    assert df_summary[&#34;n_nans&#34;].sum() == df_org.isnull().sum().sum()
+
+
+def test_summarize_df_check_original_column_types():
+    df_org = read_testdata_to_dataframe()
+    df_summary = summarize_df(df_org)
+
+    # Types of columns in the original DataFrame
+    org_col_type_names = [t.name for t in df_org.dtypes.values]
+
+    # Count how many times each field in the &#34;type&#34; column in df_summary
+    # occurs in the list of column types of df_org
+    colcount = np.zeros(len(df_summary)).astype(np.int64)
+    for idx, coltype in enumerate(df_summary[&#34;type&#34;].values):
+        colcount[idx] = org_col_type_names.count(coltype)
+
+    # The count should match these fields in df_summary
+    assert np.all(colcount == df_summary[&#34;ncols&#34;].values)
+
+
+def test_add_datefields_default_behavior():
+    df_org = read_testdata_to_dataframe()
+    df_date = add_datefields(df_org, DATE_COLUMN)
+
+    datefields = [
+        &#34;dayofweek&#34;,
+        &#34;dayofyear&#34;,
+        &#34;is_month_end&#34;,
+        &#34;is_month_start&#34;,
+        &#34;is_quarter_end&#34;,
+        &#34;is_quarter_start&#34;,
+        &#34;quarter&#34;,
+        &#34;week&#34;,
+    ]
+
+    for field in datefields:
+        assert f&#34;{DATE_COLUMN}_{field}&#34; in df_date.columns.values
+
+
+def test_add_datefields_drop_original():
+    df_org = read_testdata_to_dataframe()
+    df_date = add_datefields(df_org, DATE_COLUMN, drop_original=True)
+
+    assert DATE_COLUMN not in df_date.columns.values
+
+
+def test_add_datefields_custom_field_selection():
+    CUSTOM_CHOICE = &#34;dayofweek&#34;
+
+    df_org = read_testdata_to_dataframe()
+    df_date = add_datefields(df_org, DATE_COLUMN, attrs=[CUSTOM_CHOICE])
+
+    assert f&#34;{DATE_COLUMN}_{CUSTOM_CHOICE}&#34; in df_date.columns.values
+    assert len(df_date.columns) == (len(df_org.columns) + 1)
+
+
+def test_add_datefields_inplace():
+    CUSTOM_CHOICE = &#34;dayofyear&#34;
+
+    df_org = read_testdata_to_dataframe()
+    _ = add_datefields(df_org, DATE_COLUMN, inplace=True)
+
+    assert f&#34;{DATE_COLUMN}_{CUSTOM_CHOICE}&#34; in df_org.columns.values
+
+
+def test_add_nan_columns_default_behavior():
+    df_org = read_testdata_to_dataframe()
+    df_null = add_nan_columns(df_org)
+
+    # Returns pandas series with column name as index, boolean as values
+    null_bool = df_org.isnull().sum() != 0
+    null_cols = null_bool.index[null_bool.values]
+
+    for colname in null_cols:
+        assert f&#34;{colname}_{NULL_SUFFIX}&#34; in df_null.columns.values
+
+
+def test_add_nan_columns_custom_field_selection():
+    CUSTOM_CHOICE = &#34;setting&#34;
+
+    df_org = read_testdata_to_dataframe()
+    df_null = add_nan_columns(df_org, column_list=[CUSTOM_CHOICE])
+
+    assert f&#34;{CUSTOM_CHOICE}_{NULL_SUFFIX}&#34; in df_null.columns.values
+    assert len(df_null.columns) == (len(df_org.columns) + 1)
+
+
+def test_add_nan_columns_inplace():
+    CUSTOM_CHOICE = &#34;setting&#34;
+
+    df_org = read_testdata_to_dataframe()
+    _ = add_nan_columns(df_org, column_list=[CUSTOM_CHOICE], inplace=True)
+
+    assert f&#34;{CUSTOM_CHOICE}_{NULL_SUFFIX}&#34; in df_org.columns.values
+
+
+def test_numeric_nans_default_behavior():
+    df_org = read_testdata_to_dataframe()
+    df_inspect = inspect_df(df_org)
+    df_numeric = numeric_nans(df_org)
+
+    numeric_cols = df_inspect[df_inspect[&#34;is_numeric&#34;]][&#34;column&#34;].values
+
+    for col in numeric_cols:
+        df_inspect_nulls = df_inspect[df_inspect[&#34;column&#34;] == col][&#34;nulls&#34;].values[0]
+        # These could contain zero nulls, depending on the test data
+        if df_inspect_nulls &gt; 0:
+            df_numeric_nulls = df_numeric[df_numeric[&#34;column&#34;] == col][&#34;nulls&#34;].values[
+                0
+            ]
+            assert col in df_numeric[&#34;column&#34;].values
+            assert df_numeric_nulls == df_inspect_nulls
+        else:
+            assert col not in df_numeric[&#34;column&#34;].values
+
+
+def test_categorize_df_object_columns_categorized():
+    df_org = read_testdata_to_dataframe()
+    (df_cat, _) = categorize_df(df_org)
+
+    org_cols = df_org.columns.values
+    is_object = []
+
+    for col in org_cols:
+        is_object.append(is_object_dtype(df_org[col]))
+
+    object_cols = org_cols[is_object]
+
+    for col in object_cols:
+        assert f&#34;{col}_{CATEGORY_SUFFIX}&#34; in df_cat.columns.values
+
+
+def test_pipeline_integration_with_scikit_learn():
+    DATA_COLUMN = &#34;y_data&#34;
+
+    df_org = read_testdata_to_dataframe()
+    df_test = replace_numeric_nulls(df_org)
+    df_test = object_nan_to_empty(df_test)
+    df_test = categorical_columns(df_test)
+    df_test = apply_categories(df_test, drop=True)
+    df_test = add_datefields(df_test, &#34;date&#34;, drop_original=True)
+
+    # Add column with &#39;dependent variable&#39;
+    df_test[DATA_COLUMN] = np.arange(len(df_test))
+    # Split variable out again
+    X_data, y_data = split_dataset(df_test, DATA_COLUMN)
+
+    model = RandomForestRegressor(n_estimators=2, n_jobs=1, max_depth=3)
+    model.fit(X_data, y_data)
+
+
+def test_pipeline_integration_with_scikit_learn_missing_step_should_fail():
+    &#34;&#34;&#34; The purpose of this test is to make sure that
+        test_pipeline_integration_with_scikit_learn() will fail if the data is
+        not processed correctly
+    &#34;&#34;&#34;
+    DATA_COLUMN = &#34;y_data&#34;
+
+    df_org = read_testdata_to_dataframe()
+    df_test = replace_numeric_nulls(df_org)
+    df_test = object_nan_to_empty(df_test)
+    df_test = categorical_columns(df_test)
+    # df_test = apply_categories(df_test, drop=True)
+    df_test = add_datefields(df_test, &#34;date&#34;, drop_original=True)
+
+    # Add column with &#39;dependent variable&#39;
+    df_test[DATA_COLUMN] = np.arange(len(df_test))
+    # Split variable out again
+    X_data, y_data = split_dataset(df_test, DATA_COLUMN)
+
+    model = RandomForestRegressor(n_estimators=2, n_jobs=1, max_depth=3)
+    with pytest.raises(Exception):
+        model.fit(X_data, y_data)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="dataworks.tests.test_df_utils.read_testdata_to_dataframe"><code class="name flex">
+<span>def <span class="ident">read_testdata_to_dataframe</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_testdata_to_dataframe():
+    cwd = os.path.dirname(os.path.abspath(__file__))
+    df = pd.read_csv(
+        cwd + &#34;/testdata/testdata.csv&#34;, parse_dates=[DATE_COLUMN], index_col=0
+    )
+
+    return df</code></pre>
+</details>
+</dd>
+<dt id="dataworks.tests.test_df_utils.test_add_datefields_custom_field_selection"><code class="name flex">
+<span>def <span class="ident">test_add_datefields_custom_field_selection</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_add_datefields_custom_field_selection():
+    CUSTOM_CHOICE = &#34;dayofweek&#34;
+
+    df_org = read_testdata_to_dataframe()
+    df_date = add_datefields(df_org, DATE_COLUMN, attrs=[CUSTOM_CHOICE])
+
+    assert f&#34;{DATE_COLUMN}_{CUSTOM_CHOICE}&#34; in df_date.columns.values
+    assert len(df_date.columns) == (len(df_org.columns) + 1)</code></pre>
+</details>
+</dd>
+<dt id="dataworks.tests.test_df_utils.test_add_datefields_default_behavior"><code class="name flex">
+<span>def <span class="ident">test_add_datefields_default_behavior</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_add_datefields_default_behavior():
+    df_org = read_testdata_to_dataframe()
+    df_date = add_datefields(df_org, DATE_COLUMN)
+
+    datefields = [
+        &#34;dayofweek&#34;,
+        &#34;dayofyear&#34;,
+        &#34;is_month_end&#34;,
+        &#34;is_month_start&#34;,
+        &#34;is_quarter_end&#34;,
+        &#34;is_quarter_start&#34;,
+        &#34;quarter&#34;,
+        &#34;week&#34;,
+    ]
+
+    for field in datefields:
+        assert f&#34;{DATE_COLUMN}_{field}&#34; in df_date.columns.values</code></pre>
+</details>
+</dd>
+<dt id="dataworks.tests.test_df_utils.test_add_datefields_drop_original"><code class="name flex">
+<span>def <span class="ident">test_add_datefields_drop_original</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_add_datefields_drop_original():
+    df_org = read_testdata_to_dataframe()
+    df_date = add_datefields(df_org, DATE_COLUMN, drop_original=True)
+
+    assert DATE_COLUMN not in df_date.columns.values</code></pre>
+</details>
+</dd>
+<dt id="dataworks.tests.test_df_utils.test_add_datefields_inplace"><code class="name flex">
+<span>def <span class="ident">test_add_datefields_inplace</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_add_datefields_inplace():
+    CUSTOM_CHOICE = &#34;dayofyear&#34;
+
+    df_org = read_testdata_to_dataframe()
+    _ = add_datefields(df_org, DATE_COLUMN, inplace=True)
+
+    assert f&#34;{DATE_COLUMN}_{CUSTOM_CHOICE}&#34; in df_org.columns.values</code></pre>
+</details>
+</dd>
+<dt id="dataworks.tests.test_df_utils.test_add_nan_columns_custom_field_selection"><code class="name flex">
+<span>def <span class="ident">test_add_nan_columns_custom_field_selection</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_add_nan_columns_custom_field_selection():
+    CUSTOM_CHOICE = &#34;setting&#34;
+
+    df_org = read_testdata_to_dataframe()
+    df_null = add_nan_columns(df_org, column_list=[CUSTOM_CHOICE])
+
+    assert f&#34;{CUSTOM_CHOICE}_{NULL_SUFFIX}&#34; in df_null.columns.values
+    assert len(df_null.columns) == (len(df_org.columns) + 1)</code></pre>
+</details>
+</dd>
+<dt id="dataworks.tests.test_df_utils.test_add_nan_columns_default_behavior"><code class="name flex">
+<span>def <span class="ident">test_add_nan_columns_default_behavior</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_add_nan_columns_default_behavior():
+    df_org = read_testdata_to_dataframe()
+    df_null = add_nan_columns(df_org)
+
+    # Returns pandas series with column name as index, boolean as values
+    null_bool = df_org.isnull().sum() != 0
+    null_cols = null_bool.index[null_bool.values]
+
+    for colname in null_cols:
+        assert f&#34;{colname}_{NULL_SUFFIX}&#34; in df_null.columns.values</code></pre>
+</details>
+</dd>
+<dt id="dataworks.tests.test_df_utils.test_add_nan_columns_inplace"><code class="name flex">
+<span>def <span class="ident">test_add_nan_columns_inplace</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_add_nan_columns_inplace():
+    CUSTOM_CHOICE = &#34;setting&#34;
+
+    df_org = read_testdata_to_dataframe()
+    _ = add_nan_columns(df_org, column_list=[CUSTOM_CHOICE], inplace=True)
+
+    assert f&#34;{CUSTOM_CHOICE}_{NULL_SUFFIX}&#34; in df_org.columns.values</code></pre>
+</details>
+</dd>
+<dt id="dataworks.tests.test_df_utils.test_categorize_df_object_columns_categorized"><code class="name flex">
+<span>def <span class="ident">test_categorize_df_object_columns_categorized</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_categorize_df_object_columns_categorized():
+    df_org = read_testdata_to_dataframe()
+    (df_cat, _) = categorize_df(df_org)
+
+    org_cols = df_org.columns.values
+    is_object = []
+
+    for col in org_cols:
+        is_object.append(is_object_dtype(df_org[col]))
+
+    object_cols = org_cols[is_object]
+
+    for col in object_cols:
+        assert f&#34;{col}_{CATEGORY_SUFFIX}&#34; in df_cat.columns.values</code></pre>
+</details>
+</dd>
+<dt id="dataworks.tests.test_df_utils.test_inspect_df_assert_index_is_sorted"><code class="name flex">
+<span>def <span class="ident">test_inspect_df_assert_index_is_sorted</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_inspect_df_assert_index_is_sorted():
+    df = inspect_df(read_testdata_to_dataframe())
+    v = df.index.values
+
+    assert np.all(v[1:] - v[:-1] == 1)</code></pre>
+</details>
+</dd>
+<dt id="dataworks.tests.test_df_utils.test_inspect_df_check_sum_of_nulls"><code class="name flex">
+<span>def <span class="ident">test_inspect_df_check_sum_of_nulls</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_inspect_df_check_sum_of_nulls():
+    df_org = read_testdata_to_dataframe()
+    df_inspect = inspect_df(df_org)
+
+    assert df_inspect[&#34;nulls&#34;].sum() == df_org.isnull().sum().sum()</code></pre>
+</details>
+</dd>
+<dt id="dataworks.tests.test_df_utils.test_numeric_nans_default_behavior"><code class="name flex">
+<span>def <span class="ident">test_numeric_nans_default_behavior</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_numeric_nans_default_behavior():
+    df_org = read_testdata_to_dataframe()
+    df_inspect = inspect_df(df_org)
+    df_numeric = numeric_nans(df_org)
+
+    numeric_cols = df_inspect[df_inspect[&#34;is_numeric&#34;]][&#34;column&#34;].values
+
+    for col in numeric_cols:
+        df_inspect_nulls = df_inspect[df_inspect[&#34;column&#34;] == col][&#34;nulls&#34;].values[0]
+        # These could contain zero nulls, depending on the test data
+        if df_inspect_nulls &gt; 0:
+            df_numeric_nulls = df_numeric[df_numeric[&#34;column&#34;] == col][&#34;nulls&#34;].values[
+                0
+            ]
+            assert col in df_numeric[&#34;column&#34;].values
+            assert df_numeric_nulls == df_inspect_nulls
+        else:
+            assert col not in df_numeric[&#34;column&#34;].values</code></pre>
+</details>
+</dd>
+<dt id="dataworks.tests.test_df_utils.test_pipeline_integration_with_scikit_learn"><code class="name flex">
+<span>def <span class="ident">test_pipeline_integration_with_scikit_learn</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_pipeline_integration_with_scikit_learn():
+    DATA_COLUMN = &#34;y_data&#34;
+
+    df_org = read_testdata_to_dataframe()
+    df_test = replace_numeric_nulls(df_org)
+    df_test = object_nan_to_empty(df_test)
+    df_test = categorical_columns(df_test)
+    df_test = apply_categories(df_test, drop=True)
+    df_test = add_datefields(df_test, &#34;date&#34;, drop_original=True)
+
+    # Add column with &#39;dependent variable&#39;
+    df_test[DATA_COLUMN] = np.arange(len(df_test))
+    # Split variable out again
+    X_data, y_data = split_dataset(df_test, DATA_COLUMN)
+
+    model = RandomForestRegressor(n_estimators=2, n_jobs=1, max_depth=3)
+    model.fit(X_data, y_data)</code></pre>
+</details>
+</dd>
+<dt id="dataworks.tests.test_df_utils.test_pipeline_integration_with_scikit_learn_missing_step_should_fail"><code class="name flex">
+<span>def <span class="ident">test_pipeline_integration_with_scikit_learn_missing_step_should_fail</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>The purpose of this test is to make sure that
+test_pipeline_integration_with_scikit_learn() will fail if the data is
+not processed correctly</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_pipeline_integration_with_scikit_learn_missing_step_should_fail():
+    &#34;&#34;&#34; The purpose of this test is to make sure that
+        test_pipeline_integration_with_scikit_learn() will fail if the data is
+        not processed correctly
+    &#34;&#34;&#34;
+    DATA_COLUMN = &#34;y_data&#34;
+
+    df_org = read_testdata_to_dataframe()
+    df_test = replace_numeric_nulls(df_org)
+    df_test = object_nan_to_empty(df_test)
+    df_test = categorical_columns(df_test)
+    # df_test = apply_categories(df_test, drop=True)
+    df_test = add_datefields(df_test, &#34;date&#34;, drop_original=True)
+
+    # Add column with &#39;dependent variable&#39;
+    df_test[DATA_COLUMN] = np.arange(len(df_test))
+    # Split variable out again
+    X_data, y_data = split_dataset(df_test, DATA_COLUMN)
+
+    model = RandomForestRegressor(n_estimators=2, n_jobs=1, max_depth=3)
+    with pytest.raises(Exception):
+        model.fit(X_data, y_data)</code></pre>
+</details>
+</dd>
+<dt id="dataworks.tests.test_df_utils.test_provided_testdata_OK"><code class="name flex">
+<span>def <span class="ident">test_provided_testdata_OK</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>In order for unit tests to make sense, there should be at least:
+- one date column
+- one numeric column
+- one object column</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_provided_testdata_OK():
+    &#34;&#34;&#34; In order for unit tests to make sense, there should be at least:
+            - one date column
+            - one numeric column
+            - one object column
+    &#34;&#34;&#34;
+    df_org = read_testdata_to_dataframe()
+
+    is_datetime = []
+    is_numeric = []
+    is_object = []
+
+    for col in df_org.columns:
+        is_datetime.append(is_datetime64_any_dtype(df_org[col]))
+        is_numeric.append(is_numeric_dtype(df_org[col]))
+        is_object.append(is_object_dtype(df_org[col]))
+
+    assert True in is_datetime
+    assert True in is_numeric
+    assert True in is_object</code></pre>
+</details>
+</dd>
+<dt id="dataworks.tests.test_df_utils.test_summarize_df_check_original_column_types"><code class="name flex">
+<span>def <span class="ident">test_summarize_df_check_original_column_types</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_summarize_df_check_original_column_types():
+    df_org = read_testdata_to_dataframe()
+    df_summary = summarize_df(df_org)
+
+    # Types of columns in the original DataFrame
+    org_col_type_names = [t.name for t in df_org.dtypes.values]
+
+    # Count how many times each field in the &#34;type&#34; column in df_summary
+    # occurs in the list of column types of df_org
+    colcount = np.zeros(len(df_summary)).astype(np.int64)
+    for idx, coltype in enumerate(df_summary[&#34;type&#34;].values):
+        colcount[idx] = org_col_type_names.count(coltype)
+
+    # The count should match these fields in df_summary
+    assert np.all(colcount == df_summary[&#34;ncols&#34;].values)</code></pre>
+</details>
+</dd>
+<dt id="dataworks.tests.test_df_utils.test_summarize_df_check_sum_of_nulls"><code class="name flex">
+<span>def <span class="ident">test_summarize_df_check_sum_of_nulls</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_summarize_df_check_sum_of_nulls():
+    df_org = read_testdata_to_dataframe()
+    df_summary = summarize_df(df_org)
+
+    assert df_summary[&#34;n_nans&#34;].sum() == df_org.isnull().sum().sum()</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="dataworks.tests" href="index.html">dataworks.tests</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="dataworks.tests.test_df_utils.read_testdata_to_dataframe" href="#dataworks.tests.test_df_utils.read_testdata_to_dataframe">read_testdata_to_dataframe</a></code></li>
+<li><code><a title="dataworks.tests.test_df_utils.test_add_datefields_custom_field_selection" href="#dataworks.tests.test_df_utils.test_add_datefields_custom_field_selection">test_add_datefields_custom_field_selection</a></code></li>
+<li><code><a title="dataworks.tests.test_df_utils.test_add_datefields_default_behavior" href="#dataworks.tests.test_df_utils.test_add_datefields_default_behavior">test_add_datefields_default_behavior</a></code></li>
+<li><code><a title="dataworks.tests.test_df_utils.test_add_datefields_drop_original" href="#dataworks.tests.test_df_utils.test_add_datefields_drop_original">test_add_datefields_drop_original</a></code></li>
+<li><code><a title="dataworks.tests.test_df_utils.test_add_datefields_inplace" href="#dataworks.tests.test_df_utils.test_add_datefields_inplace">test_add_datefields_inplace</a></code></li>
+<li><code><a title="dataworks.tests.test_df_utils.test_add_nan_columns_custom_field_selection" href="#dataworks.tests.test_df_utils.test_add_nan_columns_custom_field_selection">test_add_nan_columns_custom_field_selection</a></code></li>
+<li><code><a title="dataworks.tests.test_df_utils.test_add_nan_columns_default_behavior" href="#dataworks.tests.test_df_utils.test_add_nan_columns_default_behavior">test_add_nan_columns_default_behavior</a></code></li>
+<li><code><a title="dataworks.tests.test_df_utils.test_add_nan_columns_inplace" href="#dataworks.tests.test_df_utils.test_add_nan_columns_inplace">test_add_nan_columns_inplace</a></code></li>
+<li><code><a title="dataworks.tests.test_df_utils.test_categorize_df_object_columns_categorized" href="#dataworks.tests.test_df_utils.test_categorize_df_object_columns_categorized">test_categorize_df_object_columns_categorized</a></code></li>
+<li><code><a title="dataworks.tests.test_df_utils.test_inspect_df_assert_index_is_sorted" href="#dataworks.tests.test_df_utils.test_inspect_df_assert_index_is_sorted">test_inspect_df_assert_index_is_sorted</a></code></li>
+<li><code><a title="dataworks.tests.test_df_utils.test_inspect_df_check_sum_of_nulls" href="#dataworks.tests.test_df_utils.test_inspect_df_check_sum_of_nulls">test_inspect_df_check_sum_of_nulls</a></code></li>
+<li><code><a title="dataworks.tests.test_df_utils.test_numeric_nans_default_behavior" href="#dataworks.tests.test_df_utils.test_numeric_nans_default_behavior">test_numeric_nans_default_behavior</a></code></li>
+<li><code><a title="dataworks.tests.test_df_utils.test_pipeline_integration_with_scikit_learn" href="#dataworks.tests.test_df_utils.test_pipeline_integration_with_scikit_learn">test_pipeline_integration_with_scikit_learn</a></code></li>
+<li><code><a title="dataworks.tests.test_df_utils.test_pipeline_integration_with_scikit_learn_missing_step_should_fail" href="#dataworks.tests.test_df_utils.test_pipeline_integration_with_scikit_learn_missing_step_should_fail">test_pipeline_integration_with_scikit_learn_missing_step_should_fail</a></code></li>
+<li><code><a title="dataworks.tests.test_df_utils.test_provided_testdata_OK" href="#dataworks.tests.test_df_utils.test_provided_testdata_OK">test_provided_testdata_OK</a></code></li>
+<li><code><a title="dataworks.tests.test_df_utils.test_summarize_df_check_original_column_types" href="#dataworks.tests.test_df_utils.test_summarize_df_check_original_column_types">test_summarize_df_check_original_column_types</a></code></li>
+<li><code><a title="dataworks.tests.test_df_utils.test_summarize_df_check_sum_of_nulls" href="#dataworks.tests.test_df_utils.test_summarize_df_check_sum_of_nulls">test_summarize_df_check_sum_of_nulls</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.7.5</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>
