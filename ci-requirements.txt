@@ -3,7 +3,7 @@ pandas
 bandit
 black 
 flake8 
-mypy
+mypy==0.782
 pytest 
 pytest-cov 
 codecov
