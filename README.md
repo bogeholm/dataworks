@@ -11,6 +11,7 @@ Utilities for working with data in Python.
 [![LGTM Quality](https://img.shields.io/lgtm/grade/python/github/bogeholm/dataworks.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/bogeholm/dataworks/context:python)
 [![Codacy](https://api.codacy.com/project/badge/Grade/44e0328191574bf6bcf63b9e307a0024)](https://app.codacy.com/manual/bogeholm/dataworks/dashboard)
 [![Codebeat](https://codebeat.co/badges/12172b77-cbda-4c87-b3ae-c9baf5036e73)](https://codebeat.co/projects/github-com-bogeholm-dataworks-master)
+[![PyUp](https://pyup.io/repos/github/bogeholm/dataworks/shield.svg?t=1600448453100)](https://pyup.io)
 
 **[bogeholm.github.io/dataworks/](https://bogeholm.github.io/dataworks/)**
 
