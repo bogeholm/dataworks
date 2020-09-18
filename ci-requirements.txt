@@ -2,7 +2,7 @@ numpy
 pandas
 bandit
 black 
-flake8 
+flake8==3.8.3 
 mypy
 pytest 
 pytest-cov 
