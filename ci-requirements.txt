@@ -6,6 +6,6 @@ flake8
 mypy
 pytest 
 pytest-cov 
-codecov
+codecov==2.1.10
 pdoc3
 scikit-learn
