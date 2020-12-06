@@ -1,6 +1,6 @@
 numpy
 pandas
-bandit
+bandit==1.6.3
 black==19.10b0 
 flake8 
 mypy
